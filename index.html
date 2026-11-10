@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROTOTYPE</title>
+</head>
+<body>
+    <p>Skriv inn IP addr</p>
+    <input type="text" id="ipinput" placeholder="192.168.12.0">
+    <p>Skriv inn SM </p>
+    <input type="text" id="sminput" placeholder="255.255.255.0">
+    <button onclick="handleInput()">Submit</button>
+
+    <button onclick="example()">Eksempel!</button>
+
+
+
+
+    <p id="resultIP"></p>
+    <p id="resultNetID"></p>
+    <p id="resultCidr"></p>
+    <p id="resultAddr"></p>
+</body>
+<script src="index.js"></script>
+</html>
