@@ -55,13 +55,36 @@ function  sigmaBallz(a) {
 let BGC = document.body.style.backgroundColor;
 let isGreen = true;
 
+//har number | string | bool (true - false )
+//logiske ++ iteration,,, 1
+// for (let i = 0; i <= a; i++){
+// 
+//
+//
+// need while loop,,, 
+// · Minst 2 nye JavaScript-funksjoner || in what sence 
+//
+// · Web-appen skal manipulere CSS på siden i forhold til brukers «oppførsel» (f.eks. flytte på elementer, endre størrelse på elementer, endre farge på elementer).
+//
+//
+//
+//
+//   LES OPPGAVE PÅ TEMAS!!!
+// · Du skal legge inn kommentar på alle punktene over, med en kort beskrivelse.
+//
 
+
+
+
+
+
+//basic random testing of css ahhhhhhhhhhhhh
 function change() {
     isGreen = !isGreen;
 
     if(isGreen){
         document.body.style.backgroundColor = "lightblue";
-    }else{
+    }else {
         document.body.style.backgroundColor = "red";
     }
 
@@ -94,7 +117,7 @@ function calculate_network(ip_input, sm_input){
         
         //jeg lager en ny var, siden jeg trenger å bruke smArr senere; lmao
         let newArr = smArr;
-        
+      
         let tempN = Number(newArr[i]);
         let binaryTxt = tempN.toString(2);
 
