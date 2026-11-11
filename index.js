@@ -20,9 +20,9 @@ CIDR også*/
 //onst addr_result = document.querySelector("#resultAddr");
 //let inputIP = "192.168.2.123";
 
-//let inputIP = "192.168.2.123";
+let inputIP = "192.168.2.123";
 //
-//let inputSM = "255.255.255.128";
+let inputSM = "255.255.255.128";
 
 //calculate_network(inputIP, inputSM);
 function example(){
@@ -31,7 +31,9 @@ function example(){
     calculate_network(inputIP, inputSM);
 
 }
-function handleInput() {
+
+
+function handleInput(){
     // Select the input element and extract its value string
     let InputIP = document.getElementById("ipinput").value;
     let InputSM = document.getElementById("sminput").value;
@@ -42,6 +44,33 @@ function handleInput() {
     //document.getElementById("display").textContent = `You entered: ${inputString}`;
 }
 
+///just some random bs; lmao ps mathias:) 
+function  sigmaBallz(a) {
+    for (let i = 0; i <= a; i++){
+        console.log("SIGMA");
+    }
+
+}
+
+let BGC = document.body.style.backgroundColor;
+let isGreen = true;
+
+
+function change() {
+    isGreen = !isGreen;
+
+    if(isGreen){
+        document.body.style.backgroundColor = "lightblue";
+    }else{
+        document.body.style.backgroundColor = "red";
+    }
+
+
+}
+
+
+sigmaBallz(21);
+
 function calculate_network(ip_input, sm_input){
     let ipArr = ip_input.split(".");
     let smArr = sm_input.split(".");
@@ -49,6 +78,8 @@ function calculate_network(ip_input, sm_input){
     Number(ipArr, smArr);
     console.log(ipArr, smArr);
     resultCidr
+   
+
 
     const ip_result = document.querySelector("#resultIP");
     const netID_result = document.querySelector("#resultNetID");
