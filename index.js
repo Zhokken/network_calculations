@@ -38,9 +38,9 @@ let inputSM = "255.255.255.128";
 
 //calculate_network(inputIP, inputSM);
 function example(){
-    let inputIP = '192.168.2.123';
-    let inputSM = '255.255.255.128';
-    calculate_network(inputIP, inputSM);
+    let _inputIP = '192.168.2.123';
+    let _inputSM = '255.255.255.128';
+    calculate_network(_inputIP, _inputSM);
 
 }
 
@@ -225,8 +225,8 @@ function displayResult(ip, c, nid){
     // };
     const productInfo = {
         title: `${ip}`,
-        price: `${ip}`,
-        imageUrl:`${ip}`
+        price: `${c}`,
+        imageUrl:`${nid}`
     };
     // 2. Select the container
     const container = document.getElementById("target-container");
@@ -236,7 +236,7 @@ function displayResult(ip, c, nid){
     <div class="product-card">
         <h3>${productInfo.title}</h3>
         <p class="price">${productInfo.price}</p>
-        <button onclick="alert('Added!')">Buy Now</button>
+        <p class="price">${productInfo.imageUrl}</p>
     </div>
 `;
 
