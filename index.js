@@ -1,3 +1,15 @@
+
+
+
+
+
+
+
+
+
+
+
+
 /*IP 192.168.2.123
 SM 255.255.255.0
     ^
@@ -78,6 +90,11 @@ let isGreen = true;
 
 
 
+
+
+
+
+
 //basic random testing of css ahhhhhhhhhhhhh
 function change() {
     isGreen = !isGreen;
@@ -100,15 +117,15 @@ function calculate_network(ip_input, sm_input){
 
     Number(ipArr, smArr);
     console.log(ipArr, smArr);
-    resultCidr
    
 
-
-    const ip_result = document.querySelector("#resultIP");
-    const netID_result = document.querySelector("#resultNetID");
-    const cidr_result = document.querySelector("#resultCidr");
-    const addr_result = document.querySelector("#resultAddr");
-
+    //--- tester å displayResult via function!
+    //
+    // const ip_result = document.querySelector("#resultIP");
+    // const netID_result = document.querySelector("#resultNetID");
+    // const cidr_result = document.querySelector("#resultCidr");
+    // const addr_result = document.querySelector("#resultAddr");
+    //
     //let counter = 0; //tell hvor stor /xx er!
     let result = ""; //fikk undefined første iteration av loop
     let resultBinary = "";
@@ -146,26 +163,31 @@ function calculate_network(ip_input, sm_input){
 
     //KANSKJE NY function eller noe objects, får å gjøre result lettere og lage flere av
         
+ 
     //bare vis ip i tilleg, why not
-    let strIP = `IP: ${inputIP}`
+    let strIP = `IP: ${inputIP}`;
     //ip_result.innerHTML += strIP;
-    ip_result.innerHTML = strIP;
+    // ip_result.innerHTML = strIP; ---via funk
 
     //// NettverksID  ***** REFACTOR CODE SENERE TIL NOE BEDRE 
-    //gjør dette for å ta vekk . bak stringen
-    finalResult = result.slice(0, -1);
+    //gjør dette for å ta vekk . bak stringen | siden det ble sånn etter loopen,
+    const finalResult = result.slice(0, -1);
+ 
+
     //FÅ RESULT PÅ SKJERM lmao
     //netID_result.innerHTML += "Nid: " + finalResult;
-    netID_result.innerHTML = "Nid: " + finalResult;
+    // netID_result.innerHTML = "Nid: " + finalResult; --- displayer via funksjon nå
 
 
     //jeg dobbelsjekker om det type av string for å være sikker lmao
     console.log(resultBinary, typeof(resultBinary));
     const c = resultBinary.split("1").length -1;
+    
+    //en str som har input SM og CIDR nummer - føler det er bedre sånn
+    let cidr = `sm: ${inputSM} \\${c}`;
 
-    let cidr = `sm: ${inputSM} \\${c}`
     //cidr_result.innerHTML += cidr;
-    cidr_result.innerHTML = cidr;
+    // cidr_result.innerHTML = cidr; --- displayer via funksjon nå
 
 
 
@@ -173,12 +195,54 @@ function calculate_network(ip_input, sm_input){
     const IP_BITS = 32;
     let hostBits = IP_BITS - c;
     let totalAddr = Math.pow(2, hostBits) -2; //- bc og host
-    console.log(totalAddr);
-    let strAddr = `tilgjenegelige addresser: ${totalAddr}`
+    // console.log(totalAddr); -- skal ta bort debug kode senere
+    
+
+
+
+    let strAddr = `tilgjenegelige addresser: ${totalAddr}`;
+   
+
     //addr_result.innerHTML += strAddr;
-    addr_result.innerHTML = strAddr;
+    // addr_result.innerHTML = strAddr; --- jeg displayer med en function nå
     //se på submentmask for å få CIRD prefix /xx
     //do some bitwise shi idk
 
+    displayResult(strIP, cidr, finalResult);
+
+    //ip, cidr, sm, totalAddr, nid
 
 }
+function displayResult(ip, c, nid){
+
+
+    //Jeg fant ett eksempel på en eller annen nettside,,,
+    // // 1. Your data object
+    // const productInfo = {
+    //     title: "",
+    //     price: "",
+    //     imageUrl: ""
+    // };
+    const productInfo = {
+        title: `${ip}`,
+        price: `${ip}`,
+        imageUrl:`${ip}`
+    };
+    // 2. Select the container
+    const container = document.getElementById("target-container");
+
+    // 3. Generate HTML template using Template Literals (backticks)
+    const productHTML = `
+    <div class="product-card">
+        <h3>${productInfo.title}</h3>
+        <p class="price">${productInfo.price}</p>
+        <button onclick="alert('Added!')">Buy Now</button>
+    </div>
+`;
+
+    // 4. Spawn it into the container
+    // Use += to append it, or = to overwrite everything inside the container
+    container.innerHTML += productHTML;
+
+}
+
