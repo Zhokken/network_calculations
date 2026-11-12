@@ -57,15 +57,15 @@ function handleInput(){
     // Display the result
     //document.getElementById("display").textContent = `You entered: ${inputString}`;
 }
-
-///just some random bs; lmao ps mathias:) 
-function  sigmaBallz(a) {
-    for (let i = 0; i <= a; i++){
-        console.log("SIGMA");
-    }
-
-}
-
+//
+// ///just some random bs; lmao ps mathias:) 
+// function  sigmaBallz(a) {
+//     for (let i = 0; i <= a; i++){
+//         console.log("SIGMA");
+//     }
+//
+// }
+//
 let BGC = document.body.style.backgroundColor;
 let isGreen = true;
 
@@ -110,26 +110,36 @@ function change() {
 
 }
 
+function remove(){
+    //assigne og declare objectet med id 'container' i html'en.
+    const container = document.getElementById("target-container");
 
-sigmaBallz(21);
+    //lage html template ved bruk av template literals | en empty for å ikke ha noe der
+    const emptyHTML = ``;
+
+    //SETT TILE true, siden vi skal gjemme containeren
+    container.hidden = true;
+
+    //sett til emptyHTML for å ta bort
+    container.innerHTML = emptyHTML;
+
+
+}
+
+
+// sigmaBallz(21);
 
 function calculate_network(ip_input, sm_input){
     let ipArr = ip_input.split(".");
     let smArr = sm_input.split(".");
 
     Number(ipArr, smArr);
+    //Number funksjon gjør om både ipArr og smArr om til type number.
     console.log(ipArr, smArr);
-   
+    //debug til consolen, litt lettere å finne feil dersom det skulle oppstå¨ 
 
-    //--- tester å displayResult via function!
-    //
-    // const ip_result = document.querySelector("#resultIP");
-    // const netID_result = document.querySelector("#resultNetID");
-    // const cidr_result = document.querySelector("#resultCidr");
-    // const addr_result = document.querySelector("#resultAddr");
-    //
-    //let counter = 0; //tell hvor stor /xx er!
-    let result = ""; //fikk undefined første iteration av loop
+
+    let result = ""; //fikk undefined første iteration av loop | så jeg assigner en empty string.
     let resultBinary = "";
     for (let i = 0; i <= 3; i++ ){
         console.log(`${ipArr[i]}, ${smArr[i]}`);
@@ -139,14 +149,7 @@ function calculate_network(ip_input, sm_input){
       
         let tempN = Number(newArr[i]);
         let binaryTxt = tempN.toString(2);
-
-        //debuggin ahhhh | ser litt bedre ut med spaces
-        console.log(`     ^^^ = ${binaryTxt}
--------------`);
         
-        //loop gjennom binary txt og iterere count da bit er 1 type shiii!
-        //assign value empty string for å ikke få undefined
-        //NVM VI SPLITTER OG TAR 1ere ikke looper.
         resultBinary += binaryTxt;
         
 
@@ -163,89 +166,69 @@ function calculate_network(ip_input, sm_input){
         result += temp2;
     }
 
-    //KANSKJE NY function eller noe objects, får å gjøre result lettere og lage flere av
-        
  
     //bare vis ip i tilleg, why not
     let strIP = `IP: ${inputIP}`;
-    //ip_result.innerHTML += strIP;
-    // ip_result.innerHTML = strIP; ---via funk
-
-    //// NettverksID  ***** REFACTOR CODE SENERE TIL NOE BEDRE 
+ 
+    //// NettverksID: 
     //gjør dette for å ta vekk . bak stringen | siden det ble sånn etter loopen,
     const finalResult = result.slice(0, -1);
  
-
-    //FÅ RESULT PÅ SKJERM lmao
-    //netID_result.innerHTML += "Nid: " + finalResult;
-    // netID_result.innerHTML = "Nid: " + finalResult; --- displayer via funksjon nå
-
-
-    //jeg dobbelsjekker om det type av string for å være sikker lmao
-    console.log(resultBinary, typeof(resultBinary));
+    //c - count tar alle 1'ere i submentmasken og tar lengden -1, **********************************WHY!?
     const c = resultBinary.split("1").length -1;
     
-    //en str som har input SM og CIDR nummer - føler det er bedre sånn
+    //en str som har input SM og CIDR nummer - føler det er bedre sånn , istedet for å legge til alt da jeg skal displaye resultatene
     let cidr = `sm: ${inputSM} \\${c}`;
 
-    //cidr_result.innerHTML += cidr;
-    // cidr_result.innerHTML = cidr; --- displayer via funksjon nå
-
-
-
-    //rough hosts calculations..
-    const IP_BITS = 32;
-    let hostBits = IP_BITS - c;
-    let totalAddr = Math.pow(2, hostBits) -2; //- bc og host
-    // console.log(totalAddr); -- skal ta bort debug kode senere
     
 
 
+    //Jeg declarerer IPv4 bits som const siden den skal ikke endres!
+    const IP_BITS = 32;
 
+    //jeg sjekker hvor mange ledige bits det er da jeg tar bort CIDR.
+    let hostBits = IP_BITS - c;
+
+
+    //lager en variable totalAddr og kalkulerere totale addresser ved bruk av hostBits. også subtracter 2 - bc og hostaddr
+    let totalAddr = Math.pow(2, hostBits) -2;
+    
+    //en variabel av type string som har totalAddr i strengen, dette gjør jeg så jeg slipper å legge til alt i resultatvisningen senere.  
     let strAddr = `tilgjenegelige addresser: ${totalAddr}`;
    
 
-    //addr_result.innerHTML += strAddr;
-    // addr_result.innerHTML = strAddr; --- jeg displayer med en function nå
-    //se på submentmask for å få CIRD prefix /xx
-    //do some bitwise shi idk
 
-    displayResult(strIP, cidr, finalResult);
-
-    //ip, cidr, sm, totalAddr, nid
-
+   displayResult(strIP, cidr, finalResult);
 }
+
+
 function displayResult(ip, c, nid){
 
 
-    //Jeg fant ett eksempel på en eller annen nettside,,,
-    // // 1. Your data object
-    // const productInfo = {
-    //     title: "",
-    //     price: "",
-    //     imageUrl: ""
-    // };
-    const productInfo = {
-        title: `${ip}`,
-        price: `${c}`,
-        imageUrl:`${nid}`
+   const resultCard = {
+        ip: `${ip}`,
+        c: `${c}`,
+        nid:`${nid}`
     };
-    // 2. Select the container
+    
+    //assigne og declare objectet med id 'container' i html'en.
     const container = document.getElementById("target-container");
 
-    // 3. Generate HTML template using Template Literals (backticks)
-    const productHTML = `
+    //lage html template ved bruk av template literals
+    const resultHTML = `
     <div class="product-card">
-        <h3>${productInfo.title}</h3>
-        <p class="price">${productInfo.price}</p>
-        <p class="price">${productInfo.imageUrl}</p>
+        <h3>${resultCard.ip}</h3>
+        <p class="price">${resultCard.c}</p>
+        <p class="price">${resultCard.nid}</p>
     </div>
 `;
+    //sett den til false. jeg har satt den til hidden = true i html, siden den vises før den spawnsed hvis ikke.
     container.hidden = false;
 
     // 4. Spawn it into the container
-    // Use += to append it, or = to overwrite everything inside the container
-    container.innerHTML += productHTML;
+    // container.innerHTML += resultHTML;
+    //JEG SETTER DEN TIL resultated isteded for å append | jeg ønsker bare ett resultat om gangen.
+    container.innerHTML = resultHTML;
 
 }
 
