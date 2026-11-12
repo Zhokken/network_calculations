@@ -1,47 +1,15 @@
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-IP 192.168.2.123
-SM 255.255.255.0
-    ^
-    11111111, 11111111, 11111111, 00000000
-
-    / 24 (calculate this as well from the ip and SM)
-
-NetID fra ip og SM
-
-CIDR også
-*/
-//get input
-
-
-/** NESTE GANG VIKTIG!§ START INPUT SOMEHTING**/
-//validate input! 
-//display some bs
-
-//CALC
-//input for testing (user input easy implementation)
-//onst addr_result = document.querySelector("#resultAddr");
-//let inputIP = "192.168.2.123";
-
+// tester uten input, det kommer snart. DETTE ER en variabel av type str
 let inputIP = "192.168.2.123";
-//
+//samme her 
 let inputSM = "255.255.255.128";
 
+
+
+//DETTE ER BARE FOR TESTING VILL BLI FJERNET ELLER KOMMENTERT UT SENERE
 //calculate_network(inputIP, inputSM);
 function example(){
-    let _inputIP = '192.168.2.123';
-    let _inputSM = '255.255.255.128';
+    let _inputIP = '192.168.2.111';
+    let _inputSM = '255.255.255.4';
     calculate_network(_inputIP, _inputSM);
 
 }
