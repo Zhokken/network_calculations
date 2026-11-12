@@ -7,17 +7,22 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <p>Skriv inn IP addr</p>
-    <input type="text" id="ipinput" placeholder="192.168.12.0">
-    <p>Skriv inn SM </p>
-    <input type="text" id="sminput" placeholder="255.255.255.0">
-    <button onclick="handleInput()">Submit</button>
+    <div>
+        <p>Skriv inn IP addr</p>
+        <input type="text" id="ipinput" placeholder="192.168.12.0">
+        <p>Skriv inn SM </p>
+        <input type="text" id="sminput" placeholder="255.255.255.0">
+        <button onclick="handleInput()">Submit</button>
 
-    <button onclick="example()">Eksempel!</button>
-    <button onclick="change()">CHANGE_BGC!</button>
+        <button onclick="example()">Eksempel!</button>
+        <button onclick="change()">CHANGE_BGC!</button>
+
+
+    </div>
 
     <!--testing out some bs again-->
-    <div id="target-container"></div>
+    <div id="target-container" hidden></div>
+
 
     <!--trenger ikke disse lenger-->
     <!-- <p id="resultIP"></p> -->

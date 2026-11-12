@@ -1,5 +1,32 @@
-body{
-    background-color: red;
+/* body{ */
+/*     background-color: beige; */
+/* } */
+/**/
+/*tar inspirasjon fra nettstedet lagt inn på paddlet*/
+body {
+	color:#222;
+	font-size:16px;
+	font-family:Arial,Verdana,Helvetica,sans-serif;
+	border-style:none;
+   
+    /*center contents*/
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
 }
 
+#target-container{
+    background-color: blue;
+    width: 100px;
+    height: auto;
+    max-width:500px; 
+    padding:20px; 
+    background:#f0eedc; 
+    border:1px solid #e0e0e0; 
+    border-radius:7px; 
+}
 
+#main{
+
+}

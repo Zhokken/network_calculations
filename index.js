@@ -10,7 +10,8 @@
 
 
 
-/*IP 192.168.2.123
+/*
+IP 192.168.2.123
 SM 255.255.255.0
     ^
     11111111, 11111111, 11111111, 00000000
@@ -19,7 +20,8 @@ SM 255.255.255.0
 
 NetID fra ip og SM
 
-CIDR også*/
+CIDR også
+*/
 //get input
 
 
@@ -140,7 +142,7 @@ function calculate_network(ip_input, sm_input){
 
         //debuggin ahhhh | ser litt bedre ut med spaces
         console.log(`     ^^^ = ${binaryTxt}
-    -------------`);
+-------------`);
         
         //loop gjennom binary txt og iterere count da bit er 1 type shiii!
         //assign value empty string for å ikke få undefined
@@ -148,7 +150,7 @@ function calculate_network(ip_input, sm_input){
         resultBinary += binaryTxt;
         
 
-        
+    
         
         //do the bitwise calculations
         let temp1 = ipArr[i] & smArr[i];
@@ -239,6 +241,7 @@ function displayResult(ip, c, nid){
         <p class="price">${productInfo.imageUrl}</p>
     </div>
 `;
+    container.hidden = false;
 
     // 4. Spawn it into the container
     // Use += to append it, or = to overwrite everything inside the container
