@@ -7,12 +7,13 @@ let inputSM = "255.255.255.128";
 
 //DETTE ER BARE FOR TESTING VILL BLI FJERNET ELLER KOMMENTERT UT SENERE
 //calculate_network(inputIP, inputSM);
-function example(){
-    let _inputIP = '192.168.2.111';
-    let _inputSM = '255.255.255.4';
-    calculate_network(_inputIP, _inputSM);
-
-}
+// making example none existing
+// function example(){
+//     let _inputIP = '192.168.2.111';
+//     let _inputSM = '255.255.255.128';
+//     calculate_network(_inputIP, _inputSM);
+//
+// }
 
 
 function handleInput(){
@@ -166,17 +167,19 @@ function calculate_network(ip_input, sm_input){
    
 
 
-   displayResult(strIP, cidr, finalResult);
+   displayResult(strIP, cidr, finalResult, strAddr);
 }
 
 
-function displayResult(ip, c, nid){
+function displayResult(ip, c, nid, t_adr){
 
 
    const resultCard = {
         ip: `${ip}`,
         c: `${c}`,
-        nid:`${nid}`
+        nid:`${nid}`,
+        t_adr:`${t_adr}`
+
     };
     
     //assigne og declare objectet med id 'container' i html'en.
@@ -188,6 +191,7 @@ function displayResult(ip, c, nid){
         <h3>${resultCard.ip}</h3>
         <p class="price">${resultCard.c}</p>
         <p class="price">${resultCard.nid}</p>
+        <p class="price">${resultCard.t_adr}</p>
     </div>
 `;
     //sett den til false. jeg har satt den til hidden = true i html, siden den vises før den spawnsed hvis ikke.
