@@ -212,6 +212,8 @@ function calculate_network(ip_input, sm_input){
 	//// NettverksID: 
 	//gjør dette for å ta vekk . bak stringen | siden det ble sånn etter loopen,
 	const finalResult = result.slice(0, -1);
+	let nid_result = `Nid: ${finalResult}`;
+
 
 	//c - count tar alle 1'ere i submentmasken og tar lengden -1, **********************************WHY!?
 	const c = resultBinary.split("1").length -1;
@@ -242,7 +244,7 @@ function calculate_network(ip_input, sm_input){
 
 
 
-	displayResult(strIP, cidr, finalResult, strAddr);
+	displayResult(strIP, cidr, nid_result, strAddr);
 }
 
 
@@ -263,7 +265,8 @@ function displayResult(ip, c, nid, t_adr){
 	//lage html template ved bruk av template literals
 	const resultHTML = `
     <div class="product-card">
-	<h3>${resultCard.ip}</h3>
+    	<h3>Resultat</h3>
+	<p>${resultCard.ip}</p>
 	<p class="price">${resultCard.c}</p>
 	<p class="price">${resultCard.nid}</p>
 	<p class="price">${resultCard.t_adr}</p>
