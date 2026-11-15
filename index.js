@@ -11,7 +11,10 @@
 //
 //
 //
-let exampleIP = '192.168.2.201'
+//
+//lager en array av valid subnet mask tall, som jeg kan bruke flere steder
+const validSM_TallArr = [255, 254, 252, 248, 240, 224, 192, 128, 0];
+let exampleIP = '192.168.2.111'
 let exampleSM =  '255.255.255.128';
 
 document.getElementById("ipinput").placeholder = exampleIP;
@@ -36,7 +39,7 @@ function handleInput(){
 	if(!isValidInput(IP_input)){
 		//show, med error (grunn til feil)
 		container.hidden = false;
-		container.textContent = "Uguldig IPaddr. Eks: 192.168.2.123";
+		container.textContent = "Ugyldig IP-addresse. Eks: 192.168.2.123";
 		//return exiter func å går videre
 		return;
 	}
@@ -44,7 +47,8 @@ function handleInput(){
 	if(!isValidMask(SM_input)){
 		//show, med error (grunn til feil)
 		container.hidden = false;
-		container.textContent = "Subnetmask må ha fire tall fra 0 - 255. Eks. 255.255.255.0";
+		container.textContent = `Subnetmask må ha fire tall fra 0 - 255. Eks. 255.255.255.0
+			gyldige er: ${validSM_TallArr} `;
 		//return exiter func å går videre
 		return;
 	}
@@ -98,16 +102,15 @@ function isValidMask(mask){
 	if(!isValidInput(mask)) return false;
 
 	const parts = mask.split(".");
-	const validTallArr = [255, 254, 252, 248, 240, 224, 192, 128, 0];
 	let i = 0;
 
 	while (i < parts.length){
 		const tall = Number(parts[i]);
 		
 		//sjekker om oktet av index i er inkludert i array av valid sm inputs, er den
-		//ikke det så returnerer den false
-		if(!validTallArr.includes(tall)) return false;
-
+		//ikke det så returnerer den false med error melding
+		if(!tall.includes(validSM_TallArr)) return false;
+								
 		//hvis den er mindre en 255 så har sm stoppet, simpel as that
 		if (i > 0 && Number(parts[i - 1]) < 255 && tall !== 0) return false;
 		// 		    ^^^^^^^^^^^^^^^^^^^ - sjekker om forrige tall er mindre enn 255 - som betyr at sm er stoppet

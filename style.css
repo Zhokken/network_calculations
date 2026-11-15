@@ -2,7 +2,8 @@ body {
     max-width: 520px;
     margin: 32px auto;
     padding: 0 16px;
-    font: 16px/1.5 Arial, sans-serif;
+    font-family: monospace, Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
     color: #252525;
     background: white;
 }
@@ -14,7 +15,11 @@ body, #skjema{
     border: 1px solid #d4d1c5;
     border-radius: 5px;
 }
+#target-container{
+	text-align: center;
+	margin-top: 10px;
 
+}
 p {
     margin: 0 0 6px;
 }
