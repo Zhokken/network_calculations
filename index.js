@@ -8,12 +8,20 @@
 //DETTE ER BARE FOR TESTING VILL BLI FJERNET ELLER KOMMENTERT UT SENERE
 //calculate_network(inputIP, inputSM);
 // making example none existing
-// function example(){
-//     let _inputIP = '192.168.2.111';
-//     let _inputSM = '255.255.255.128';
-//     calculate_network(_inputIP, _inputSM);
 //
-// }
+//
+//
+let exampleIP = '192.168.2.201'
+let exampleSM =  '255.255.255.128';
+
+document.getElementById("ipinput").placeholder = exampleIP;
+document.getElementById("sminput").placeholder = exampleSM;
+function example(){
+    let ip = exampleIP;
+    let sm = exampleSM;
+    calculate_network(ip, sm);
+
+}
 
 
 function handleInput(){
@@ -24,7 +32,7 @@ function handleInput(){
 	//få container til å buke nedenfor (dette ble kopiert fra en tidligere implementasjon)
 	const container = document.getElementById("target-container");
 
-	//validate input ved hjelp av en validate func
+	//validate input ved hjelp av en validate func (sjekk om det ikke er valid)
 	if(!isValidInput(IP_input)){
 		//show, med error (grunn til feil)
 		container.hidden = false;
@@ -32,8 +40,8 @@ function handleInput(){
 		//return exiter func å går videre
 		return;
 	}
-	//GJØR SAMME MED Subnet mask input
-	if(!isValidInput(SM_input)){
+	//GJØR SAMME MED Subnet mask input bare med en annen funksjon
+	if(!isValidMask(SM_input)){
 		//show, med error (grunn til feil)
 		container.hidden = false;
 		container.textContent = "Subnetmask må ha fire tall fra 0 - 255. Eks. 255.255.255.0";
@@ -42,7 +50,14 @@ function handleInput(){
 	}
 
 
-	//validate sm input enda mere! jeg ønsker ikke at x8.x8.x8.00010000 skal være lov
+	//validate sm input enda mere! jeg ønsker ikke at x8.x8.x8.00010000 skal være lov, men dette så for vanskelig ut, så jeg sjekker om input
+	//er like subnetmasks som er lov
+	
+	
+
+
+
+
 	calculate_network(IP_input,SM_input);
 }
 
@@ -50,6 +65,7 @@ function handleInput(){
 //må validate input å gi bruker riktig svar dersom det skulle oppstå feil input
 function isValidInput(input){
 
+//JEG SKAL sikkert lage en funksjon som returnerer splitter verdi istedet for å gjøre dette hele tiden
 	const parts = input.split("."); //splitt i deler som ikke skal endre bare leses
 	if (parts.length !==4) return false; //sjekker om input har fire okteter (x.x.x.x) de skal være separert ved . (av brukeren) --- returnerer false å dette skal vi sjekke for i beregningen  
 
@@ -64,19 +80,44 @@ function isValidInput(input){
 		//sjekket om andre metoder som regex, men denne måten ser bedre ut å oppnår samme mål
 
 		//assign en variabel med current index av parts (part) som number constant
-		const tall = Numer(part);
+		const tall = Number(part);
 		//gjør dette i one-liners siden det er såppas småe valgsetninger
 		if (!Number.isInteger(tall)) return false;
 		if (tall < 0 || tall > 255) return false;
 		//dersom input er en tom string, må dette ikke funke, derfor sjekker,
 		//jeg num med str, siden 0 er ikke lik "0"
 		if (String(tall) !== part) return false;
-
-
-
-
+		i++;
 	}
+	// dersom det funker
+	return true;
 }
+
+
+function isValidMask(mask){
+	if(!isValidInput(mask)) return false;
+
+	const parts = mask.split(".");
+	const validTallArr = [255, 254, 252, 248, 240, 224, 192, 128, 0];
+	let i = 0;
+
+	while (i < parts.length){
+		const tall = Number(parts[i]);
+		
+		//sjekker om oktet av index i er inkludert i array av valid sm inputs, er den
+		//ikke det så returnerer den false
+		if(!validTallArr.includes(tall)) return false;
+
+		//hvis den er mindre en 255 så har sm stoppet, simpel as that
+		if (i > 0 && Number(parts[i - 1]) < 255 && tall !== 0) return false;
+		// 		    ^^^^^^^^^^^^^^^^^^^ - sjekker om forrige tall er mindre enn 255 - som betyr at sm er stoppet
+		i++; // iterate i for loopen type shi
+	}
+
+	return true; //dersom det er valid input
+
+}
+
 
 //
 //
@@ -90,33 +131,6 @@ function isValidInput(input){
 // 
 let BGC = document.body.style.backgroundColor;
 let isGreen = true;
-
-//har number | string | bool (true - false )
-//logiske ++ iteration,,, 1
-// for (let i = 0; i <= a; i++){
-// 
-//
-//
-// need while loop,,, 
-// · Minst 2 nye JavaScript-funksjoner || in what sence 
-//
-// · Web-appen skal manipulere CSS på siden i forhold til brukers «oppførsel» (f.eks. flytte på elementer, endre størrelse på elementer, endre farge på elementer).
-//
-//
-//
-//
-//   LES OPPGAVE PÅ TEMAS!!!
-// · Du skal legge inn kommentar på alle punktene over, med en kort beskrivelse.
-//
-
-
-
-
-
-
-
-
-
 
 
 //basic random testing of css ahhhhhhhhhhhhh
@@ -184,13 +198,13 @@ function calculate_network(ip_input, sm_input){
 		let temp2 = temp1 += ".";
 
 		//cast numb til str
-		toString(temp1);
+		toString(temp2); //så man legger sammen strings (trenger ikke dette i js though)
 		result += temp2;
 	}
 
 
 	//bare vis ip i tilleg, why not
-	let strIP = `IP: ${inputIP}`;
+	let strIP = `IP: ${ip_input}`;
 
 	//// NettverksID: 
 	//gjør dette for å ta vekk . bak stringen | siden det ble sånn etter loopen,
@@ -200,7 +214,7 @@ function calculate_network(ip_input, sm_input){
 	const c = resultBinary.split("1").length -1;
 
 	//en str som har input SM og CIDR nummer - føler det er bedre sånn , istedet for å legge til alt da jeg skal displaye resultatene
-	let cidr = `sm: ${inputSM} \\${c}`;
+	let cidr = `sm: ${sm_input} \\${c}`;
 
 
 
@@ -213,7 +227,12 @@ function calculate_network(ip_input, sm_input){
 
 
 	//lager en variable totalAddr og kalkulerere totale addresser ved bruk av hostBits. også subtracter 2 - bc og hostaddr
-	let totalAddr = Math.pow(2, hostBits) -2;
+	// JEG SPURTE AI OM EN FEIL JEG FIKKE DA JEG TESTET ULIKE SENARIOER I SM
+	//let totalAddr = Math.pow(2, hostBits) -2;
+	//
+	//DERSOM CIDR er /32 har man ikke nok hosts for å subtracte med... derofor må dette fikses!
+	let totalAddr = Math.pow(2, hostBits);
+	if (hostBits >= 2) totalAddr -= 2;
 
 	//en variabel av type string som har totalAddr i strengen, dette gjør jeg så jeg slipper å legge til alt i resultatvisningen senere.  
 	let strAddr = `tilgjenegelige addresser: ${totalAddr}`;
