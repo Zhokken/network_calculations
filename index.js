@@ -109,8 +109,8 @@ function isValidMask(mask){
 		
 		//sjekker om oktet av index i er inkludert i array av valid sm inputs, er den
 		//ikke det så returnerer den false med error melding
-		if(!tall.includes(validSM_TallArr)) return false;
-								
+		//arrayet skal shekke om the inneholder tall
+		if(!validSM_TallArr.includes(tall)) return false;
 		//hvis den er mindre en 255 så har sm stoppet, simpel as that
 		if (i > 0 && Number(parts[i - 1]) < 255 && tall !== 0) return false;
 		// 		    ^^^^^^^^^^^^^^^^^^^ - sjekker om forrige tall er mindre enn 255 - som betyr at sm er stoppet
